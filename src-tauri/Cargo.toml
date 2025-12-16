@@ -2,7 +2,7 @@
 name = "parrot"
 version = "0.1.1"
 description = "Voice anonymizer - speech to text to speech"
-authors = ["you"]
+authors = ["blue-dokkaebi"]
 license = "GPL-3.0"
 repository = "https://github.com/blue-dokkaebi/parrot"
 edition = "2021"
