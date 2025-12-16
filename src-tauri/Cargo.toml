@@ -1,0 +1,41 @@
+[package]
+name = "parrot"
+version = "0.1.0"
+description = "Voice anonymizer - speech to text to speech"
+authors = ["you"]
+license = "GPL-3.0"
+repository = "https://github.com/blue-dokkaebi/parrot"
+edition = "2021"
+rust-version = "1.77.2"
+
+[lib]
+name = "parrot_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.5.3", features = [] }
+
+[dependencies]
+serde_json = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+log = "0.4"
+tauri = { version = "2.9.5", features = [] }
+tauri-plugin-log = "2"
+
+# Audio I/O
+cpal = "0.15"
+
+# Speech-to-text (Whisper)
+whisper-rs = "0.14"
+
+# Async runtime
+tokio = { version = "1", features = ["sync", "rt-multi-thread"] }
+
+# Error handling
+anyhow = "1.0"
+thiserror = "1.0"
+
+# Audio processing
+hound = "3.5"            # WAV file handling
+rubato = "0.16"          # Audio resampling
+dirs = "5"               # Cross-platform config directories
