@@ -1,6 +1,6 @@
 {
   "name": "parrot",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A speech to text to speech desktop app for keeping your voice anonymous",
   "type": "module",
   "scripts": {

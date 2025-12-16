@@ -3,6 +3,9 @@ use std::path::PathBuf;
 use std::process::{Command, Stdio};
 use std::io::Write;
 
+#[cfg(windows)]
+use std::os::windows::process::CommandExt;
+
 #[derive(Clone, Debug)]
 pub struct Voice {
     pub id: String,
@@ -89,16 +92,21 @@ impl TextToSpeech {
         log::info!("Synthesizing: {}", text);
 
         // Run piper and capture raw audio output
-        let mut child = Command::new(piper_path)
-            .args([
+        let mut cmd = Command::new(piper_path);
+        cmd.args([
                 "--model", voice.model_path.to_str().unwrap(),
                 "--config", voice.config_path.to_str().unwrap(),
                 "--output-raw",
             ])
             .stdin(Stdio::piped())
             .stdout(Stdio::piped())
-            .stderr(Stdio::piped())
-            .spawn()
+            .stderr(Stdio::piped());
+
+        // Hide console window on Windows
+        #[cfg(windows)]
+        cmd.creation_flags(0x08000000); // CREATE_NO_WINDOW
+
+        let mut child = cmd.spawn()
             .map_err(|e| anyhow!("Failed to spawn piper: {}", e))?;
 
         // Write text to stdin

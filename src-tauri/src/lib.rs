@@ -207,17 +207,17 @@ pub fn run() {
 
                     let mut first_voice = None;
                     for (id, name, file_base) in voices {
-                        // Find voice files (production: flat in resources, dev: in models/voices)
+                        // Find voice files (production: in voices/ subfolder, dev: in models/voices)
                         let model_path = possible_dirs.iter()
                             .flat_map(|d| vec![
-                                d.join(format!("{}.onnx", file_base)),
-                                d.join("models").join("voices").join(format!("{}.onnx", file_base)),
+                                d.join("voices").join(format!("{}.onnx", file_base)),  // Production
+                                d.join("models").join("voices").join(format!("{}.onnx", file_base)),  // Dev
                             ])
                             .find(|p| p.exists());
                         let config_path = possible_dirs.iter()
                             .flat_map(|d| vec![
-                                d.join(format!("{}.onnx.json", file_base)),
-                                d.join("models").join("voices").join(format!("{}.onnx.json", file_base)),
+                                d.join("voices").join(format!("{}.onnx.json", file_base)),  // Production
+                                d.join("models").join("voices").join(format!("{}.onnx.json", file_base)),  // Dev
                             ])
                             .find(|p| p.exists());
 

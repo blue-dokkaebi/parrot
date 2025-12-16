@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "Parrot",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "identifier": "com.bluedokkaebi.parrot",
   "build": {
     "frontendDist": "../dist",
@@ -33,12 +33,17 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ],
-    "resources": [
-      "../models/ggml-tiny.en.bin",
-      "../models/voices/*",
-      "../piper/piper/piper.exe",
-      "../piper/piper/*.dll"
-    ],
+    "resources": {
+      "../models/ggml-tiny.en.bin": ".",
+      "../models/voices/": "voices/",
+      "../piper/piper/piper.exe": ".",
+      "../piper/piper/espeak-ng.dll": ".",
+      "../piper/piper/onnxruntime.dll": ".",
+      "../piper/piper/onnxruntime_providers_shared.dll": ".",
+      "../piper/piper/piper_phonemize.dll": ".",
+      "../piper/piper/espeak-ng-data/": "espeak-ng-data/",
+      "../piper/piper/libtashkeel_model.ort": "."
+    },
     "windows": {
       "webviewInstallMode": {
         "type": "embedBootstrapper"
